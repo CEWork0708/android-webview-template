@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
-
+        webView.loadUrl(Constants.DEMO_WEB_URL);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedError(WebView view, int errorCode,
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        webView.loadUrl(Constants.DEMO_WEB_URL);
+
 
         webSettings.setDisplayZoomControls(false);
 

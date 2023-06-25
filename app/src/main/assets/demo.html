@@ -1,0 +1,90 @@
+<html>
+<head>
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
+    <style>
+        .button {
+          display: inline-block;
+          padding: 15px 25px;
+          font-size: 24px;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          outline: none;
+          color: #fff;
+          background-color: #1E90FF;
+          border: none;
+          border-radius: 15px;
+          box-shadow: 0 9px #999;
+          align-items: center;
+          position: relative;
+          font-family:  LiHei Pro ;
+        }
+
+        .button:hover {background-color: #0f83ee}
+
+        .button:active {
+          background-color: #0f83ee;
+          box-shadow: 0 5px #666;
+          transform: translateY(4px);
+        }
+
+    </style>
+
+</head>
+<body class="box1">
+
+<div>
+    <button id="banner" class="banner">
+        橫幅廣告
+    </button>
+
+    <button id="rewarded" class="rewarded">
+        獎勵廣告
+    </button>
+
+    <button id="interstitial" class="interstitial">
+        插入廣告
+    </button>
+    <div id ="content">內容</div>
+</div>
+<script>
+        const banner = document.getElementById("banner");
+        banner.addEventListener("click", bannerAction);
+
+        const rewarded = document.getElementById("rewarded");
+        rewarded.addEventListener("click", rewardedAction);
+
+        const interstitial = document.getElementById("interstitial");
+        interstitial.addEventListener("click", interstitialAction);
+
+        const content = document.getElementById("content");
+
+        function bannerAction() {
+          content.innerHTML = "bannerAction"
+          if(typeof(appJsInterface) !== 'undefined'){
+<!--             appJsInterface.restartApp();-->
+          }
+        }
+
+
+
+        function rewardedAction() {
+        content.innerHTML = "rewardedAction"
+          if(typeof(appJsInterface) !== 'undefined'){
+<!--             appJsInterface.restartApp();-->
+          }
+        }
+
+
+
+        function interstitialAction() {
+        content.innerHTML = "interstitialAction"
+          if(typeof(appJsInterface) !== 'undefined'){
+<!--             appJsInterface.restartApp();-->
+          }
+        }
+
+
+    </script>
+</body>
+</html>
