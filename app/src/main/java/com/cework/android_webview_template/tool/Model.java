@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.cework.android_webview_template.MainActivity;
 import com.cework.android_webview_template.define.Constants;
 import com.cework.android_webview_template.tool.Factory;
 
@@ -34,7 +35,7 @@ import java.util.Locale;
  */
 public class Model {
     Factory factory = Factory.getInstance();
-    Activity controlActivity;
+    MainActivity controlActivity;
     Application controlApplication;
     Context controlContext;
     JavaScriptInterface controlJavaScriptInterface;
@@ -46,35 +47,11 @@ public class Model {
         createObj();
     }
 
-    public Model(Activity activity) {
+    public Model(MainActivity activity) {
         controlActivity = activity;
         controlContext = null;
         controlApplication = null;
         controlJavaScriptInterface = null;
-        createObj();
-    }
-
-    public Model(Application application) {
-        controlActivity = null;
-        controlContext = null;
-        controlApplication = application;
-        controlJavaScriptInterface = null;
-        createObj();
-    }
-
-    public Model(Context context) {
-        controlActivity = null;
-        controlApplication = null;
-        controlContext = context;
-        controlJavaScriptInterface = null;
-        createObj();
-    }
-
-    public Model(Activity activity, JavaScriptInterface javaScriptInterface) {
-        controlActivity = activity;
-        controlContext = null;
-        controlApplication = null;
-        controlJavaScriptInterface = javaScriptInterface;
         createObj();
     }
 

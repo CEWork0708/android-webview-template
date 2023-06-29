@@ -6,15 +6,16 @@ import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
+import com.cework.android_webview_template.MainActivity;
 import com.cework.android_webview_template.define.Constants;
 
 public class JavaScriptInterface {
     private final String TAG = "JavaScriptInterface";
     private WebView controlWebView;
     private Model controlModel;
-    private Activity controlActivity;
+    private MainActivity controlActivity;
 
-    public JavaScriptInterface(Activity activity ,WebView webView, Model model
+    public JavaScriptInterface(MainActivity activity ,WebView webView, Model model
     ){
         controlWebView = webView;
         controlModel = model;
@@ -33,34 +34,23 @@ public class JavaScriptInterface {
     }
 
     @JavascriptInterface
-    public void restartApp() {
-        Log.d(TAG, "  restartApp   " );
+    public void showRewardedAd() {
+        Log.d(TAG, "showRewardedAd");
         controlActivity.runOnUiThread(new Runnable() {
             //  @Override
             public void run() {
-                controlWebView.loadUrl(Constants.SERVER_URL);
+                controlActivity.showRewardedAd();
             }
         });
     }
 
     @JavascriptInterface
-    public void loadUrl(final String url) {
-        Log.d(TAG, "  loadUrl  url " +url);
+    public void showInterstitialAd() {
+        Log.d(TAG, "showInterstitialAd");
         controlActivity.runOnUiThread(new Runnable() {
             //  @Override
             public void run() {
-                controlWebView.loadUrl(Constants.SERVER_URL + url);
-            }
-        });
-    }
-
-    @JavascriptInterface
-    public void showInternelErrorPage() {
-        Log.d(TAG, "showInternelErrorPage");
-        controlActivity.runOnUiThread(new Runnable() {
-            //  @Override
-            public void run() {
-                controlWebView.loadUrl(Constants.NETWORK_ERROR_WEB_URL);
+                controlActivity.showInterstitialAd();
             }
         });
     }

@@ -16,47 +16,9 @@ public class Constants {
     public static final String JAVASCRIPT_PARAMETER_FOR_ANDROID = "jsAppInterface";
     public static final String SET_ACCOUNT_PASSWORD_JAVASCRIPT = "setDefaultAccountPassword";
 
-
-    //permissions
-    public static final int SYSTEM_ALERT_WINDOW_PERMISSIONS_REQUEST_CODE = 0;
-    public static final int WRITE_EXTERNAL_STORAGE_PERMISSIONS_REQUEST_CODE = 1;
-
-    //sqlite
-    public static final String DATABASE_NAME = "ACRDB";
-    public static final int DATABASE_VERSION = 1;
-    public static final String ID_SQL = "id";
-    //table user
-    public static final String TABLE_USER_SQL = "User";
-    public static final String USER_ID_SQL = "UserId";
-    public static final String USER_USERNAME_SQL = "username";
-    public static final String USER_PASSWORD_SQL = "password";
-    public static final String USER_PROJECT_NAME_SQL = "projectName";
-    public static final String USER_SERVER_TOKEN_SQL = "serverToken";
-    public static final String USER_SERVER_IP_SQL = "ip";
-    public static final String USER_TABLE_CREATE_SQL = "CREATE TABLE "
-            + TABLE_USER_SQL + " ( "
-            + USER_USERNAME_SQL + " text not null ," + USER_PASSWORD_SQL + " text not null ,"
-            + USER_PROJECT_NAME_SQL + " text not null ,"+ USER_SERVER_TOKEN_SQL + " text not null ,"
-            + USER_SERVER_IP_SQL + " text not null ,"
-            + "CONSTRAINT "+USER_ID_SQL+" PRIMARY KEY ("+USER_USERNAME_SQL+","+USER_PROJECT_NAME_SQL+","+USER_SERVER_IP_SQL+")); ";
-
-
-    //table config
-    public static final String TABLE_CONFIG_SQL = "Config";
-    public static final String CONFIG_FIREBASE_TOKEN_SQL = "firebaseToken";
-    public static final String CONFIG_NOTIFICATION_ID_SQL = "notificationId";
-    public static final String CONFIG_ACCOUNT_SQL = "account";
-    public static final String CONFIG_PASSWORD_SQL = "password";
-    public static final String CONFIG_USER_ID_SQL = "userId";
-
-    public static final String CONFIG_TABLE_CREATE_SQL = "CREATE TABLE "
-            + TABLE_CONFIG_SQL + " ( " + ID_SQL + "  INTEGER primary key autoincrement, "
-            + CONFIG_FIREBASE_TOKEN_SQL + " text not null,"
-            + CONFIG_NOTIFICATION_ID_SQL + " text not null,"
-            + CONFIG_ACCOUNT_SQL + " text not null,"
-            + CONFIG_PASSWORD_SQL + " text not null,"
-            + CONFIG_USER_ID_SQL + " text not null"
-            +"); ";
+    //AD
+    public static final String INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712";
+    public static final String REWARDED_ID = "ca-app-pub-3940256099942544/5224354917";
 
 
     //util
@@ -107,16 +69,4 @@ public class Constants {
     public static final String ID = "id";
     public static final String NOTIFICATION_NO_MATCH_ID = "no match id";
 
-    //rest api
-    public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "/user-service/notification/addNotification";
-    public static String EDIT_NOTIFICATION_REST_API = SERVER_URL + "/user-service/notification/editNotification";
-    public static String LOGIN_REST_API = SERVER_URL + "/auth-service/auth/login";
-
-    //notification
-    public static final String NOTIFICATION_TYPE = "type";
-    public static final String NOTIFICATION_TITLE = "title";
-    public static final String NOTIFICATION_CONTENT = "body";
-    public static final String NOTIFICATION_RESERVE_HOUSE_ID = "reserveHouseId";
-    public static final int NOTIFICATION_TYPE_RESERVE_HOUSE = 1;
-    public static final int NOTIFICATION_TYPE_SYSTEM = 0;
 }

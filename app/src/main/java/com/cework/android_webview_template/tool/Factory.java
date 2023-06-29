@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.webkit.WebView;
 
+import com.cework.android_webview_template.MainActivity;
 import com.cework.android_webview_template.tool.JavaScriptInterface;
 
 /**
@@ -23,24 +24,13 @@ public class Factory {
     private Factory() {
     }
 
-    public JavaScriptInterface createJavaScriptInterface(Activity activity, WebView webView, Model model) {
+    public JavaScriptInterface createJavaScriptInterface(MainActivity activity, WebView webView, Model model) {
         return new JavaScriptInterface(activity, webView,model);
     }
 
-    public Model createModel(Activity activity) {
+    public Model createModel(MainActivity activity) {
         return new Model(activity);
     }
 
-    public Model createModel(Application application) {
-        return new Model(application);
-    }
-
-    public Model createModel(Context context) {
-        return new Model(context);
-    }
-
-    public Model createModel() {
-        return new Model();
-    }
 
 }
