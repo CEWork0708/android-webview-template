@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                             // an ad is loaded.
                             mInterstitialAd = interstitialAd;
                             Log.i(TAG, "onAdLoaded");
-                            setOnInterstitialAd();
+                            onInterstitialAd();
                             mInterstitialAd.show(MainActivity.this);
                         }
 
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setOnInterstitialAd(){
+    private void onInterstitialAd(){
         mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
             @Override
             public void onAdClicked() {
@@ -201,40 +201,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onAdLoaded(@NonNull RewardedAd ad) {
                         rewardedAd = ad;
                         Log.d(TAG, "Ad was loaded.");
-                        rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdClicked() {
-                                // Called when a click is recorded for an ad.
-                                Log.d(TAG, "Ad was clicked.");
-                            }
-
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                // Called when ad is dismissed.
-                                // Set the ad reference to null so you don't show the ad a second time.
-                                Log.d(TAG, "Ad dismissed fullscreen content.");
-                                rewardedAd = null;
-                            }
-
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                // Called when ad fails to show.
-                                Log.e(TAG, "Ad failed to show fullscreen content.");
-                                rewardedAd = null;
-                            }
-
-                            @Override
-                            public void onAdImpression() {
-                                // Called when an impression is recorded for an ad.
-                                Log.d(TAG, "Ad recorded an impression.");
-                            }
-
-                            @Override
-                            public void onAdShowedFullScreenContent() {
-                                // Called when ad is shown.
-                                Log.d(TAG, "Ad showed fullscreen content.");
-                            }
-                        });
+                        onRewardedAd();
                         if (rewardedAd != null) {
                             Activity activityContext = MainActivity.this;
                             rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
@@ -256,6 +223,42 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void onRewardedAd(){
+        rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+            @Override
+            public void onAdClicked() {
+                // Called when a click is recorded for an ad.
+                Log.d(TAG, "Ad was clicked.");
+            }
+
+            @Override
+            public void onAdDismissedFullScreenContent() {
+                // Called when ad is dismissed.
+                // Set the ad reference to null so you don't show the ad a second time.
+                Log.d(TAG, "Ad dismissed fullscreen content.");
+                rewardedAd = null;
+            }
+
+            @Override
+            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                // Called when ad fails to show.
+                Log.e(TAG, "Ad failed to show fullscreen content.");
+                rewardedAd = null;
+            }
+
+            @Override
+            public void onAdImpression() {
+                // Called when an impression is recorded for an ad.
+                Log.d(TAG, "Ad recorded an impression.");
+            }
+
+            @Override
+            public void onAdShowedFullScreenContent() {
+                // Called when ad is shown.
+                Log.d(TAG, "Ad showed fullscreen content.");
+            }
+        });
+    }
 
     private void initJavaScriptInterface(){
         controlJavaScriptInterface = factory.createJavaScriptInterface(this,webView,controlModel);
