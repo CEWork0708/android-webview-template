@@ -73,9 +73,13 @@ public class MainActivity extends AppCompatActivity {
         // Initialize the Mobile Ads SDK.
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {}
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                loadInterstitialAd(false);
+                loadRewardedAd(false);
+                initBannerAd();
+            }
         });
-        initBannerAd();
+
     }
 
     private void initBannerAd(){
@@ -124,29 +128,35 @@ public class MainActivity extends AppCompatActivity {
 
     public void showInterstitialAd(){
         if(mInterstitialAd ==null){
-            AdRequest adRequest = new AdRequest.Builder().build();
-            InterstitialAd.load(this,INTERSTITIAL_ID, adRequest,
-                    new InterstitialAdLoadCallback() {
-                        @Override
-                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                            // The mInterstitialAd reference will be null until
-                            // an ad is loaded.
-                            mInterstitialAd = interstitialAd;
-                            Log.i(TAG, "onAdLoaded");
-                            onInterstitialAd();
-                            mInterstitialAd.show(MainActivity.this);
-                        }
-
-                        @Override
-                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                            // Handle the error
-                            Log.d(TAG, loadAdError.toString());
-                            mInterstitialAd = null;
-                        }
-                    });
+            loadInterstitialAd(true);
         }else{
             mInterstitialAd.show(MainActivity.this);
         }
+    }
+
+    private void loadInterstitialAd(boolean isShow){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        InterstitialAd.load(this,INTERSTITIAL_ID, adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        Log.i(TAG, "onAdLoaded");
+                        onInterstitialAd();
+                        if(isShow == true){
+                            mInterstitialAd.show(MainActivity.this);
+                        }
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.d(TAG, loadAdError.toString());
+                        mInterstitialAd = null;
+                    }
+                });
     }
 
     private void onInterstitialAd(){
@@ -163,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 // Set the ad reference to null so you don't show the ad a second time.
                 Log.d(TAG, "Ad dismissed fullscreen content.");
                 mInterstitialAd = null;
+                loadInterstitialAd(false);
             }
 
             @Override
@@ -170,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 // Called when ad fails to show.
                 Log.e(TAG, "Ad failed to show fullscreen content.");
                 mInterstitialAd = null;
+                loadInterstitialAd(false);
             }
 
             @Override
@@ -187,6 +199,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showRewardedAd(){
+        if(rewardedAd == null){
+            loadRewardedAd(true);
+        }else{
+            rewardedAd.show(MainActivity.this, new OnUserEarnedRewardListener() {
+                @Override
+                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                    // Handle the reward.
+                    Log.d(TAG, "The user earned the reward.");
+                    int rewardAmount = rewardItem.getAmount();
+                    String rewardType = rewardItem.getType();
+                    Log.d(TAG, "rewardAmount : "+rewardType);
+                    Log.d(TAG, "rewardType : "+rewardType);
+                }
+            });
+        }
+    }
+
+    public void loadRewardedAd(boolean isShow){
         AdRequest adRequest = new AdRequest.Builder().build();
         RewardedAd.load(this, REWARDED_ID,
                 adRequest, new RewardedAdLoadCallback() {
@@ -202,9 +232,8 @@ public class MainActivity extends AppCompatActivity {
                         rewardedAd = ad;
                         Log.d(TAG, "Ad was loaded.");
                         onRewardedAd();
-                        if (rewardedAd != null) {
-                            Activity activityContext = MainActivity.this;
-                            rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
+                        if (rewardedAd != null && isShow == true) {
+                            rewardedAd.show(MainActivity.this, new OnUserEarnedRewardListener() {
                                 @Override
                                 public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
                                     // Handle the reward.
@@ -220,7 +249,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 
     private void onRewardedAd(){
@@ -237,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
                 // Set the ad reference to null so you don't show the ad a second time.
                 Log.d(TAG, "Ad dismissed fullscreen content.");
                 rewardedAd = null;
+                loadRewardedAd(false);
             }
 
             @Override
@@ -244,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
                 // Called when ad fails to show.
                 Log.e(TAG, "Ad failed to show fullscreen content.");
                 rewardedAd = null;
+                loadRewardedAd(false);
             }
 
             @Override
