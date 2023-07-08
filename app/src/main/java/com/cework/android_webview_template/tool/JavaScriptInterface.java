@@ -55,5 +55,15 @@ public class JavaScriptInterface {
         });
     }
 
+    @JavascriptInterface
+    public void setMainLayoutBackgroundColor(int R,int G, int B) {
+        Log.d(TAG, "setMainLayoutBackgroundColor");
+        controlActivity.runOnUiThread(new Runnable() {
+            //  @Override
+            public void run() {
+                controlActivity.setMainLayoutBackgroundColor(R,G,B);
+            }
+        });
+    }
 
 }

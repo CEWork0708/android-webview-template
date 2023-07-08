@@ -20,6 +20,10 @@ public class Constants {
     public static final String INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712";
     public static final String REWARDED_ID = "ca-app-pub-3940256099942544/5224354917";
 
+    // layout
+    public static final int MAINLAYOUT_BACKGROUND_COLOR_R = 0;
+    public static final int MAINLAYOUT_BACKGROUND_COLOR_G = 0;
+    public static final int MAINLAYOUT_BACKGROUND_COLOR_B = 0;
 
     //util
     public static final String OPEN_BRACE = "{";

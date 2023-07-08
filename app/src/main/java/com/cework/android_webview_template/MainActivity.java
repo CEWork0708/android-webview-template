@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.RelativeLayout;
 
 import com.cework.android_webview_template.define.Constants;
 import com.cework.android_webview_template.tool.Factory;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     AdView mAdView ;
     private RewardedAd rewardedAd;
     private InterstitialAd mInterstitialAd;
+    private RelativeLayout mainLayout;
 
 
     @Override
@@ -63,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void createObj() {
         controlModel = factory.createModel(this);
+        mainLayout = findViewById(R.id.mainLayout);
+        setMainLayoutBackgroundColor(Constants.MAINLAYOUT_BACKGROUND_COLOR_R,Constants.MAINLAYOUT_BACKGROUND_COLOR_G,Constants.MAINLAYOUT_BACKGROUND_COLOR_B);
         initWebView();
         initJavaScriptInterface();
         controlModel.setJavaScriptInterface(controlJavaScriptInterface);
@@ -125,6 +130,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void setMainLayoutBackgroundColor(int R,int G,int B){
+        mainLayout.setBackgroundColor(Color.rgb(R, G, B));
+    }
+
 
     public void showInterstitialAd(){
         if(mInterstitialAd ==null){

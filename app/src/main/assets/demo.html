@@ -8,12 +8,12 @@
         }
 
         body {
-          background-color: #ff0000; /* 使用十六進位碼指定紅色背景 */
+          background-color: #ffff00; /* 使用十六進位碼指定紅色背景 */
         }
     </style>
 
 </head>
-<body class="box1">
+<body id="main" class="box1">
 
 <div background->
     <button id="rewarded" class="rewarded">
@@ -22,6 +22,12 @@
 
     <button id="interstitial" class="interstitial">
         插入廣告
+    </button>
+    <button id="red">
+        背景紅色
+    </button>
+    <button id="green">
+        背景綠色
     </button>
     <div id ="content">內容</div>
 </div>
@@ -34,6 +40,13 @@
 
         const content = document.getElementById("content");
 
+        const main = document.getElementById("main");
+
+        const red = document.getElementById("red");
+        red.addEventListener("click", setBackgroundColorRed);
+
+        const green = document.getElementById("green");
+        green.addEventListener("click", setBackgroundColorGreen);
 
         function rewardedAction() {
         content.innerHTML = "rewardedAction"
@@ -49,6 +62,23 @@
           }
         }
 
+        function setBackgroundColorRed() {
+        content.innerHTML = "setMainLayoutBackgroundColor"
+        main.style.backgroundColor = 'red';
+          if(typeof(appJsInterface) !== 'undefined'){
+             appJsInterface.setMainLayoutBackgroundColor(255,0,0);
+
+          }
+        }
+
+        function setBackgroundColorGreen() {
+        content.innerHTML = "setMainLayoutBackgroundColor"
+        main.style.backgroundColor = '#00FF00';
+          if(typeof(appJsInterface) !== 'undefined'){
+             appJsInterface.setMainLayoutBackgroundColor(0,255,0);
+
+          }
+        }
 
     </script>
 </body>
